@@ -137,7 +137,7 @@ $(function(){
 
       $.ajax({
         type: "PUT",
-        url: "/artists",
+        url: "/artists" + $('.artist_edit_form').data('id'),
         data: edit_artist_data
         console.log('artist has been saved')
       })
@@ -154,7 +154,7 @@ $(function(){
         var edit_painting_data = $('.painting_form').serialize();
       $.ajax({
         type: "PUT",
-        url: "/paintings",
+        url: "/paintings/" + $('.painting_form').data('id'),
         data: edit_painting_data;
         console.log('painting data updated')
       })
