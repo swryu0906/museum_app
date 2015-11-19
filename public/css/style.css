@@ -92,5 +92,9 @@ ul {
   height: 600px;
   width: 600px;
   text-align: center;
-  z-index: 0;
+  z-index: 1;
+}
+
+form {
+  z-index:100;
 }
