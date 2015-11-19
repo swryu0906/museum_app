@@ -44,7 +44,7 @@
   <!-- Artist Name, Image, and Personal information will be shown -->
   <template id="artist-template" type="text/x-handlebars-template">
     {{#each artist}}
-    <div class="artist">
+    <div class="artist" data-id={{this._id}}>
       <h3>{{this.name}}</h3>
       <div class="artist-image">
         <img src={{this.img_url}}></img>
