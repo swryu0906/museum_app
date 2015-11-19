@@ -6,7 +6,6 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -44,9 +43,9 @@
   <!-- Artist Name, Image, and Personal information will be shown -->
   <template id="artist-template" type="text/x-handlebars-template">
     {{#each artist}}
-    <div class="artist" data-id={{this._id}}>
+    <!-- <div class="artist" data-id={{this._id}}> -->
       <h3>{{this.name}}</h3>
-      <div class="artist-image">
+      <!-- <div class="artist-image">
         <img src={{this.img_url}}></img>
       </div>
       <ul class="artist-info">
@@ -54,7 +53,7 @@
         <li>Birth Year: {{this.birthYear}}</li>
         <li>{{this.description}}</li>
       </ul>
-    </div>
+    </div> -->
   </template>
 
   <!-- Form to add a new Artist -->
@@ -133,5 +132,6 @@
       </button>
   </template>
 
+  <script src="script.js"></script>
 </body>
 </html>
