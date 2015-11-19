@@ -29,6 +29,7 @@ mongoose.connect(config.database);
 // body parser for getting data from POST or URL parameters
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
 // morgan to log requests to the console
 app.use(logger('dev'));
