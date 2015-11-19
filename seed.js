@@ -1,5 +1,5 @@
-var Artist = require('./models/artists.js'),
-  Painting = require('./models/paintings.js'),
+var Artist = require('./models/artist.js'),
+  Painting = require('./models/painting.js'),
   mongoose = require('mongoose');
 
 
