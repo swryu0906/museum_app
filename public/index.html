@@ -53,11 +53,61 @@
     </ul>
   </template>
 
-
+  <!-- Form to add a new Artist -->
   <template id="artist-form-template" type="text/x-handlebars-template">
+    <form class="artist_form" method="post"><br>
+      <label>Name</label><br>
+      <input id="name" type="text" name="name"><br>
+
+      <label>Image URL:</label><br>
+      <input id="img_url" type="text" name="img_url"><br>
+
+      <label>Nationality</label><br>
+      <input id="nationality" type="text" name="nationality"><br>
+
+      <label>Birth Year</label><br>
+      <input id="birthYear" type="text" name="birthYear"><br>
+
+      <label>Description</label><br>
+      <input id="description" type="text" name="description"><br>
+
+      <button id="artist_form_submit" value="artist_form_submit">
+        Create Artist
+      </button>
+
+    </form>
   </template>
 
+  <!-- Form to edit existing Artist -->
+  <!-- Input fields will be populated with existing Artist information -->
   <template id="artist-edit-template" type="text/x-handlebars-template">
+    <form class="artist_form" method="post"><br>
+      <label>Name</label><br>
+      <input id="name" type="text" name="name" value={{this.name}}><br>
+
+      <label>Image URL:</label><br>
+      <input id="img_url" type="text" name="img_url" value={{this.img_url}}><br>
+
+      <label>Nationality</label><br>
+      <input id="nationality"
+             type="text" name="nationality"
+             value={{this.nationality}}><br>
+
+      <label>Birth Year</label><br>
+      <input id="birthYear"
+             type="text" name="birthYear"
+             value={{this.birthYear}}><br>
+
+      <label>Description</label><br>
+      <input id="description"
+             type="text" name="description"
+             value={{this.description}}><br>
+
+      <button id="artist_form_submit" value="artist_form_submit">
+        Edit Artist
+      </button>
+
+    </form>
   </template>
 
   <template id="painting-form-template" type="text/x-handlebars-template">
