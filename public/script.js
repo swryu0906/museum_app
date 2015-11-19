@@ -35,7 +35,6 @@ $(function(){
     });
   });
 
-  // show the Create Artist form
   $('#addArtist').click((e) => {
     e.preventDefault();
 
@@ -47,7 +46,6 @@ $(function(){
     });
   });
 
-  // show the Create Artist form
   $('#addPainting').click((e) => {
     e.preventDefault();
 
@@ -65,7 +63,7 @@ $(function(){
 
   let showArtist = (data) => {
     resetView();
-    
+
     let $results = $('.results-div');
     let compiledTemplate = renderTemplate_show_artists(data);
     $results.html('').append(compiledTemplate)
@@ -105,31 +103,60 @@ $(function(){
 
 
 //pulls new artist info from front end and sends to server.
-  $('#artist_form_save').click( => (e){
+  $('#artist_form_submit').click( (e) =>  {
     e.preventDefault();
-    saveArtistData = {};
-    saveArtistData.name = $('#name').val();
-    saveArtistData.img_url = $('#img_url').val();
-    saveArtistData.nationality = $('#nationality').val();
-    saveArtistData.birthYear = $('#birthYear').val();
-    saveArtistData.description = $('#description').val();
-    console.log(data)
+    // saveArtistData = {};
+    // saveArtistData.name = $('#name').val();
+    // saveArtistData.img_url = $('#img_url').val();
+    // saveArtistData.nationality = $('#nationality').val();
+    // saveArtistData.birthYear = $('#birthYear').val();
+    // saveArtistData.description = $('#description').val();
+    // console.log(data)
 
+    var new_artist_data = $('.artist_form').serialize();
     $.ajax({
       type: "POST",
-      // need route from Sungwon
-      url: "/",
-      data: saveArtistData;
+      url: "/artists",
+      data: new_artist_data
       console.log('artist has been saved')
     })
   })
 
 
+  //edit artist info from front end and sends to server.
+    $('#artist_edit_submit').click( (e) => {
+      e.preventDefault();
+      // editArtistData = {};
+      // editArtistData.name = $('#name').val();
+      // editArtistData.img_url = $('#img_url').val();
+      // editArtistData.nationality = $('#nationality').val();
+      // editArtistData.birthYear = $('#birthYear').val();
+      // editArtistData.description = $('#description').val();
+      // console.log(editArtistData);
+      var edit_artist_data = $('.artist_edit_form').serialize();
 
+      $.ajax({
+        type: "PUT",
+        url: "/artists",
+        data: edit_artist_data
+        console.log('artist has been saved')
+      })
+    })
 
-
-
-
-
-
+  //edit painting info
+    $('#painting_form_submit').click( (e) => {
+      e.preventDefault();
+      // editPaintingData = {};
+      // editPaintingData.title = $('#title').val();
+      // editPaintingData.img_url = $('#img_url').val();
+      // editPaintingData.year_made = $('#year_made').val();
+      // console.log(editPaintingData);
+        var edit_painting_data = $('.painting_form').serialize();
+      $.ajax({
+        type: "PUT",
+        url: "/paintings",
+        data: edit_painting_data;
+        console.log('painting data updated')
+      })
+    })
 });

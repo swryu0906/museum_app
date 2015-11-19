@@ -44,7 +44,7 @@
   <!-- Artist Name, Image, and Personal information will be shown -->
   <template id="artist-template" type="text/x-handlebars-template">
     {{#each artist}}
-    <div class="artist">
+    <div class="artist" data-id={{this._id}}>
       <h3>{{this.name}}</h3>
       <div class="artist-image">
         <img src={{this.img_url}}></img>
@@ -87,7 +87,7 @@
   <!-- Form to edit existing Artist -->
   <!-- Input fields will be populated with existing Artist information -->
   <template id="artist-edit-template" type="text/x-handlebars-template">
-    <form class="artist_form" method="post"><br>
+    <form class="artist_edit_form" method="post"><br>
       <label>Name</label><br>
       <input id="name" type="text" name="name" value={{this.name}}><br>
 
@@ -109,7 +109,7 @@
              type="text" name="description"
              value={{this.description}}><br>
 
-      <button id="artist_form_submit" value="artist_form_submit">
+      <button id="artist_edit_submit" value="artist_edit_submit">
         Edit Artist
       </button>
 
