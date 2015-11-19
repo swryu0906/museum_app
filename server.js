@@ -72,7 +72,7 @@ router.post('/artists', (req, res) => {
     name: req.body.name,
     img_url: req.body.img_url,
     nationality: req.body.nationality,
-    birthYear: req.body.birthYear,
+    birthYear: new Date(req.body.birthYear),
     description: req.body.description
 
     // name: 'Steve Chen',
@@ -91,11 +91,55 @@ router.post('/artists', (req, res) => {
   });
 });
 
-// view all the info for an artist
+// show the info for an artist
 router.get('/artists/:id', (req, res) => {
   Artist.findOne({ _id: req.params.id }, (err, artist) => {
-    res.json(artist)
+		if(err) throw err;
+
+    res.json(artist);
   });
+});
+
+// update the info for an artist
+router.put('/artists/:id', (req, res) => {
+	// Artist.findOneUpdate({ _id: req.params.id }, (err, artist) => {
+	// 	if(err) throw err;
+	//
+	// 	console.log('Artists was successfully updated.');
+	// 	res.json(artist);
+	// });
+
+	Artist.findById(req.params.id, (err, artist) => {
+		if(err) throw err;
+
+		if(req.body.name) artist.name = req.body.name;
+		if(req.body.img_url) artist.img_url = req.body.img_url;
+		if(req.body.nationality) artist.nationality = req.body.nationality;
+		if(req.body.birthYear) artist.birthYear = new Date(req.body.birthYear);
+		if(req.body.description) artist.description = req.body.description;
+
+		artist.save((err) => {
+			if(err) throw err;
+
+			console.log('Artist was successfully updated.');
+			res.json({
+				success: true,
+				message: 'Artist was successfully updated.'
+			});
+		});
+	});
+});
+
+// delete an artist
+router.delete('/artists/:id', (req, res) => {
+	Artist.remove({ _id: req.params.id}, (err, artist) => {
+		if(err) throw err;
+
+		res.json({
+			success: true,
+			message: 'Artist was successfully deleted.'
+		});
+	});
 });
 
 
@@ -110,13 +154,13 @@ router.get('/paintings', (req, res) => {
 // create an painting
 router.post('/paintings', (req, res) => {
   let newPainting = new Painting({
-    // title: req.body.title,
-    // img_url: req.body.img_url,
-    // year_made: req.body.year_made
+    title: req.body.title,
+    img_url: req.body.img_url,
+    year_made: new Date(req.body.year_made)
 
-    title: 'handsome Steve',
-    img_url: 'handsome Guy\'s Portrait',
-    year_made: new Date(2015, 9, 8)
+    // title: 'handsome Steve',
+    // img_url: 'handsome Guy\'s Portrait',
+    // year_made: new Date(2015, 9, 8)
   });
 
   newPainting.save((err) => {
@@ -125,15 +169,54 @@ router.post('/paintings', (req, res) => {
     console.log('Painting was successfully created.');
     res.status(200).json({ success: true });
   });
-})
-// view all info for an painting
+});
+
+// show the info for an painting
 router.get('/paintings/:id', (req, res) => {
   Painting.findOne({ _id: req.params.id }, (err, painting) => {
+		if(err) throw err;
     res.json(painting);
   })
 });
 
+// update the info for an painting
+router.put('/paintings/:id', (req, res) => {
+	// Painting.findOneAndUpdate({ _id: req.params.id }, (err, painting) => {
+	// 	if(err) throw err;
+	//
+	// 	console.log('Painting was successfully updated.');
+	// 	res.json(painting);
+	// });
 
+	Painting.findById(req.params.id, (err, painting) => {
+		if(err) throw err;
+
+		if(req.body.title) painting.title = req.body.title;
+		if(req.body.img_url) painting.img_url = req.body.img_url;
+		if(req.body.year_made) painting.year_made = new Date(req.body.year_made);
+
+		painting.save((err) => {
+			if(err) throw err;
+			res.json({
+				success: true,
+				message: 'Painting was successfully updated.'
+			});
+		});
+	});
+})
+
+router.delete('/paintings/:id', (req, res) => {
+	Painting.remove({
+		_id: req.params.id
+	},
+	(err, painting) => {
+		if(err) throw err;
+		res.json({
+			success: true,
+			message: 'Painting was successfully deleted.'
+		});
+	});
+});
 
 // =================================================================
 // server ==========================================================
