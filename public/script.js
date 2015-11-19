@@ -121,7 +121,7 @@ $(function(){
 
 
   //edit artist info from front end and sends to server.
-    $('#artist_edit_submit').click( (e) => {
+    $('#artist_edit_submit').click((e) => {
       e.preventDefault();
       // editArtistData = {};
       // editArtistData.name = $('#name').val();
@@ -133,8 +133,16 @@ $(function(){
       var edit_artist_data = $('.artist_edit_form').serialize();
       $.ajax({
         type: "PUT",
-        url: "/artists" + $('.artist_edit_form').data('id'),
+        url: "/artists/" + $('.artist_edit_form').data('id'),
         data: edit_artist_data
+      });
+    });
+
+    $('#artist_delete_submit').click((e) => {
+      e.preventDefault();
+      $.ajax({
+        type: "DELETE",
+        url: "/artists/" + $('.artist_edit_form').data('id')
       });
     });
 
@@ -149,8 +157,17 @@ $(function(){
         var edit_painting_data = $('.painting_form').serialize();
       $.ajax({
         type: "PUT",
-        url: "/paintings",
+        url: "/paintings/" + $('painting_form').data('id') ,
         data: edit_painting_data
+      });
+    });
+
+  //delete painting info
+    $('#painting_delete_submit').click((e) => {
+      e.preventDefault();
+      $.ajax({
+        type: "DELETE",
+        url: "/paintings/" + $('painting_form').data('id')
       });
     });
 
