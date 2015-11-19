@@ -8,7 +8,7 @@ let artistSchema = new mongoose.Schema({
   nationality: String,
   birthYear: Date,
   description: String,
-
+  paintings: [],
   created_at: Date,
   updated_at: Date
 });

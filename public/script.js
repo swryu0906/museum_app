@@ -18,7 +18,7 @@ $(function(){
       type: "GET",
       url: "/artists"
     }).done((data) => {
-      console.log('show artists');
+      console.log(data);
       showArtist(data);
     });
   });
@@ -99,7 +99,7 @@ $(function(){
     $('.form-div').empty();
   }
 
-}
+
 
 
 //pulls new artist info from front end and sends to server.
@@ -118,9 +118,8 @@ $(function(){
       type: "POST",
       url: "/artists",
       data: new_artist_data
-      console.log('artist has been saved')
-    })
-  })
+    });
+  });
 
 
   //edit artist info from front end and sends to server.
@@ -139,9 +138,8 @@ $(function(){
         type: "PUT",
         url: "/artists",
         data: edit_artist_data
-        console.log('artist has been saved')
-      })
-    })
+      });
+    });
 
   //edit painting info
     $('#painting_form_submit').click( (e) => {
@@ -155,8 +153,7 @@ $(function(){
       $.ajax({
         type: "PUT",
         url: "/paintings",
-        data: edit_painting_data;
-        console.log('painting data updated')
-      })
-    })
+        data: edit_painting_data
+      });
+    });
 });
