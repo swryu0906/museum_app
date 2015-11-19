@@ -100,8 +100,6 @@ $(function(){
   }
 
 
-
-
 //pulls new artist info from front end and sends to server.
   $('#artist_form_submit').click( (e) =>  {
     e.preventDefault();
@@ -112,7 +110,6 @@ $(function(){
     // saveArtistData.birthYear = $('#birthYear').val();
     // saveArtistData.description = $('#description').val();
     // console.log(data)
-
     var new_artist_data = $('.artist_form').serialize();
     $.ajax({
       type: "POST",
@@ -133,16 +130,15 @@ $(function(){
       // editArtistData.description = $('#description').val();
       // console.log(editArtistData);
       var edit_artist_data = $('.artist_edit_form').serialize();
-
       $.ajax({
         type: "PUT",
-        url: "/artists",
+        url: "/artists" + $('.artist_edit_form').data('id'),
         data: edit_artist_data
       });
     });
 
   //edit painting info
-    $('#painting_form_submit').click( (e) => {
+    $('#painting_form_submit').click((e) => {
       e.preventDefault();
       // editPaintingData = {};
       // editPaintingData.title = $('#title').val();
@@ -156,4 +152,5 @@ $(function(){
         data: edit_painting_data
       });
     });
+
 });
