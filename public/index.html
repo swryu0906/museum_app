@@ -5,7 +5,7 @@
   <title>Museumr</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -26,61 +26,59 @@
 
   <div class="form-div"></div>
 
-  <!-- template will render all of the paintings -->
-  <!-- Title, Image, and year will be displayed -->
-  <template id="painting-template" type="text/x-handlebars-template">
-    {{#each painting}}
-    <div class="painting">
-      <h3>{{this.title}}</h3>
-      <div>
-        <img src={{this.img_url}}></img>
-      </div>
-      <p>{{this.year_made}}</p>
-    </div>
-  </template>
-
   <!-- template will render all of the artists -->
   <!-- Artist Name, Image, and Personal information will be shown -->
   <template id="artist-template" type="text/x-handlebars-template">
-    {{#each artist}}
-    <!-- <div class="artist" data-id={{this._id}}> -->
-      <h3>{{this.name}}</h3>
-      <!-- <div class="artist-image">
-        <img src={{this.img_url}}></img>
+    {{#each artists}}
+      <div class="artist">
+        <h3>{{this.name}}</h3>
+        <div class="artist-image">
+          <img src={{this.img_url}}></img>
+        </div>
+        <ul>
+          <li>Nationality: {{this.nationality}}</li>
+          <li>Birth Year: {{this.birthYear}}</li>
+          <li>{{this.description}}</li>
+        </ul>
       </div>
-      <ul class="artist-info">
-        <li>Nationality: {{this.nationality}}</li>
-        <li>Birth Year: {{this.birthYear}}</li>
-        <li>{{this.description}}</li>
-      </ul>
-    </div> -->
+    {{/each}}
+  </template>
+
+  <!-- template will render all of the paintings -->
+  <!-- Title, Image, and year will be displayed -->
+  <template id="painting-template" type="text/x-handlebars-template">
+    {{#each paintings}}
+      <div class="image-frame">
+        <h1>{{this.title}}</h1>
+        <img src={{this.img_url}}></img>
+        <p>{{this.year_made}}</p>
+      </div>
+    {{/each}}
   </template>
 
   <!-- Form to add a new Artist -->
   <template id="artist-form-template" type="text/x-handlebars-template">
-    <div class="form-div">
-      <form class="artist_form" method="post"><br>
-        <label>Name</label><br>
-        <input id="name" type="text" name="name"><br>
+    <form class="artist_form" method="post"><br>
+      <label>Name</label><br>
+      <input id="name" type="text" name="name"><br>
 
-        <label>Image URL:</label><br>
-        <input id="img_url" type="text" name="img_url"><br>
+      <label>Image URL:</label><br>
+      <input id="img_url" type="text" name="img_url"><br>
 
-        <label>Nationality</label><br>
-        <input id="nationality" type="text" name="nationality"><br>
+      <label>Nationality</label><br>
+      <input id="nationality" type="text" name="nationality"><br>
 
-        <label>Birth Year</label><br>
-        <input id="birthYear" type="text" name="birthYear"><br>
+      <label>Birth Year</label><br>
+      <input id="birthYear" type="text" name="birthYear"><br>
 
-        <label>Description</label><br>
-        <input id="description" type="text" name="description"><br>
+      <label>Description</label><br>
+      <input id="description" type="text" name="description"><br>
 
-        <button id="artist_form_submit" value="artist_form_submit">
-          Create Artist
-        </button>
+      <button id="artist_form_submit" value="artist_form_submit">
+        Create Artist
+      </button>
 
-      </form>
-    </div>
+    </form>
   </template>
 
   <!-- Form to edit existing Artist -->
@@ -126,7 +124,7 @@
       <input id="title" type="text" name="title" value={{this.title}}><br>
 
       <label>Image URL:</label><br>
-      <input id="img_url" type="text" name="img_url" value={{this.img_url}}><br>
+      <input id="painting_img_url" type="text" name="img_url" value={{this.img_url}}><br>
 
       <label>Year Made</label><br>
       <input id="year_made" type="text" name="year_made" value={{this.year_made}}><br>
@@ -138,6 +136,7 @@
       <button id="painting_delete_submit" value="painting_delete_submit">
         Delete Painting
       </button>
+    </form>
 
   </template>
 

@@ -31,6 +31,7 @@ $(function(){
       url: "/paintings"
     }).done((data) => {
       console.log('show paintings')
+      console.log(data);
       showPainting(data);
     });
   });
@@ -65,7 +66,7 @@ $(function(){
     resetView();
 
     let $results = $('.results-div');
-    let compiledTemplate = renderTemplate_show_artists(data);
+    let compiledTemplate = renderTemplate_show_artists({artists: data});
     $results.html('').append(compiledTemplate)
   }
 
@@ -73,7 +74,7 @@ $(function(){
     resetView();
 
     let $results = $('.results-div');
-    let compiledTemplate = renderTemplate_show_paintings(data);
+    let compiledTemplate = renderTemplate_show_paintings({paintings: data});
     $results.html('').append(compiledTemplate);
   }
 
