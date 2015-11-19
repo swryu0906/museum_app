@@ -27,19 +27,40 @@
 
   <div class="form-div"></div>
 
-  <template id="painting-template">
+  <!-- template will render all of the paintings -->
+  <!-- Title, Image, and year will be displayed -->
+  <template id="painting-template" type="text/x-handlebars-template">
+    {{#each painting}}
+    <h3>{{this.title}}</h3>
+    <div>
+      <img src={{this.img_url}}></img>
+    </div>
+    <p>{{this.year_made}}</p>
   </template>
 
-  <template id="artist-template">
+  <!-- template will render all of the artists -->
+  <!-- Artist Name, Image, and Personal information will be shown -->
+  <template id="artist-template" type="text/x-handlebars-template">
+    {{#each artist}}
+    <h3>{{this.name}}</h3>
+    <div>
+      <img src={{this.img_url}}></img>
+    </div>
+    <ul>
+      <li>Nationality: {{this.nationality}}</li>
+      <li>Birth Year: {{this.birthYear}}</li>
+      <li>{{this.description}}</li>
+    </ul>
   </template>
 
-  <template id="artist-form-template">
+
+  <template id="artist-form-template" type="text/x-handlebars-template">
   </template>
 
-  <template id="artist-edit-template">
+  <template id="artist-edit-template" type="text/x-handlebars-template">
   </template>
 
-  <template id="painting-form-template">
+  <template id="painting-form-template" type="text/x-handlebars-template">
   </template>
 
 </body>
