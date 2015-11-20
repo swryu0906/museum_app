@@ -14,13 +14,15 @@ ul {
 }
 
 .results-div {
-  position: fixed;
-  height: 83%;
+  margin:10px;
+
+  /*position: fixed;*/
+  height: 800px;
   width: 200%;
   top: 50px;
   left: 0px;
   overflow-x: scroll;
-  overflow-y: none;
+  overflow-y: scroll;
   z-index: 1;
 }
 
@@ -86,7 +88,7 @@ ul {
 
 .form-div {
   position: absolute;
-  left: 400px;
+  left: 10px;
   display: hidden;
   margin: 0 auto;
   height: 600px;
