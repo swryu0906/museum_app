@@ -17,8 +17,6 @@ let config      = require('./config');
 let Artist      = require('./models/artist');
 let Painting    = require('./models/painting');
 
-
-
 // =================================================================
 // configuration ===================================================
 // =================================================================
@@ -33,11 +31,6 @@ app.use(express.static('public'));
 
 // morgan to log requests to the console
 app.use(logger('dev'));
-
-
-
-
-
 
 // =================================================================
 // root routes =====================================================
@@ -75,12 +68,6 @@ router.post('/artists', (req, res) => {
     nationality: req.body.nationality,
     birthYear: new Date(req.body.birthYear),
     description: req.body.description
-
-    // name: 'Steve Chen',
-    // img_url: 'handsomeSteve.png',
-    // nationality: 'US',
-    // birthYear: new Date(1980, 1, 1),
-    // description: 'best artist'
   });
 
   newArtist.save((err) => {
@@ -103,12 +90,6 @@ router.get('/artists/:id', (req, res) => {
 
 // update the info for an artist
 router.put('/artists/:id', (req, res) => {
-	// Artist.findOneUpdate({ _id: req.params.id }, (err, artist) => {
-	// 	if(err) throw err;
-	//
-	// 	console.log('Artists was successfully updated.');
-	// 	res.json(artist);
-	// });
 
 	Artist.findById(req.params.id, (err, artist) => {
 		if(err) throw err;
@@ -143,7 +124,6 @@ router.delete('/artists/:id', (req, res) => {
 	});
 });
 
-
 // paitings route
 // http://localhost:3000/paintings
 router.get('/paintings', (req, res) => {
@@ -158,10 +138,6 @@ router.post('/paintings', (req, res) => {
     title: req.body.title,
     img_url: req.body.img_url,
     year_made: new Date(req.body.year_made)
-
-    // title: 'handsome Steve',
-    // img_url: 'handsome Guy\'s Portrait',
-    // year_made: new Date(2015, 9, 8)
   });
 
   newPainting.save((err) => {
@@ -182,12 +158,6 @@ router.get('/paintings/:id', (req, res) => {
 
 // update the info for an painting
 router.put('/paintings/:id', (req, res) => {
-	// Painting.findOneAndUpdate({ _id: req.params.id }, (err, painting) => {
-	// 	if(err) throw err;
-	//
-	// 	console.log('Painting was successfully updated.');
-	// 	res.json(painting);
-	// });
 
 	Painting.findById(req.params.id, (err, painting) => {
 		if(err) throw err;
