@@ -1,0 +1,187 @@
+'use strict'
+
+$(function(){
+
+  let renderTemplate_show_artists = Handlebars.compile($('template#artist-template').html());
+  let renderTemplate_show_paintings = Handlebars.compile($('template#painting-template').html());
+  let renderTemplate_show_artists_form = Handlebars.compile($('template#artist-form-template').html());
+  let renderTemplate_show_paintings_form = Handlebars.compile($('template#painting-form-template').html());
+
+// =================================================================
+// Link Click Events ===============================================
+// =================================================================
+
+  $('#showArtist').click((e) => {
+    e.preventDefault();
+
+    $.ajax({
+      type: "GET",
+      url: "/artists"
+    }).done((data) => {
+      console.log(data);
+      showArtist(data);
+    });
+  });
+
+  $('.results-div').on('click','.image-frame',(e) => {
+    e.preventDefault();
+  let id = $(e.target).closest('.image-frame').data('id');
+  console.log(id);
+  $.ajax({
+    type: "GET",
+    url: "/paintings/" + id
+  }).done((onePainting) => {
+
+    let paintingArray = [];
+    paintingArray.push(onePainting);
+
+    showOnePainting(paintingArray);
+  });
+});
+
+
+  $('#showPainting').click((e) => {
+    e.preventDefault();
+
+    $.ajax({
+      type: "GET",
+      url: "/paintings"
+    }).done((data) => {
+      console.log('show paintings')
+      console.log(data);
+      showPainting(data);
+    });
+  });
+
+  $('#addArtist').click((e) => {
+    e.preventDefault();
+
+    $.ajax({
+
+    }).done((data) => {
+      console.log('show artist form');
+      showArtistForm(data);
+    });
+  });
+
+  $('#addPainting').click((e) => {
+    e.preventDefault();
+
+    $.ajax({
+
+    }).done((data) => {
+      console.log('show artist form');
+      showPaintingForm(data);
+    });
+  });
+
+// =================================================================
+// Render templates ================================================
+// =================================================================
+
+  let showArtist = (data) => {
+    resetView();
+
+    let $results = $('.results-div');
+    let compiledTemplate = renderTemplate_show_artists({artists: data});
+    $results.html('').append(compiledTemplate)
+  }
+
+  let showOnePainting = (data) => {
+    resetView();
+
+    let $results = $('.results-div');
+    let compiledTemplate = renderTemplate_show_paintings({paintings: data});
+    $results.html('').append(compiledTemplate);
+  }
+
+  let showPainting = (data) => {
+    resetView();
+
+    let $results = $('.results-div');
+    let compiledTemplate = renderTemplate_show_paintings({paintings: data});
+    $results.html('').append(compiledTemplate);
+  }
+
+  let showArtistForm = (data) => {
+    resetView();
+
+    let $form = $('.form-div');
+    let compiledTemplate = renderTemplate_show_artists_form(data);
+    $form.html('').append(compiledTemplate);
+  }
+
+  let showPaintingForm = (data) => {
+    resetView();
+
+    let $form = $('.form-div');
+    let compiledTemplate = renderTemplate_show_paintings_form(data);
+    $form.html('').append(compiledTemplate);
+  }
+
+  // clear out the previous results and forms field
+  let resetView = () => {
+    $('.results-div').empty();
+    $('.form-div').empty();
+  }
+
+// =================================================================
+// Form button actions =============================================
+// =================================================================
+
+  //pulls new artist info from front end and sends to server.
+  $('#artist_form_submit').on('submit', (e) =>  {
+    e.stopImmediatePropagation();
+    e.preventDefault();
+
+    var new_artist_data = $('.artist_form').serialize();
+    console.log(new_artist_data);
+    $.ajax({
+      type: "POST",
+      url: "/artists",
+      data: new_artist_data
+    });
+  });
+
+  //edit artist info from front end and sends to server.
+    $('#artist_edit_submit').click((e) => {
+      e.preventDefault();
+
+      var edit_artist_data = $('.artist_edit_form').serialize();
+      $.ajax({
+        type: "PUT",
+        url: "/artists/" + $('.artist_edit_form').data('id'),
+        data: edit_artist_data
+      });
+    });
+
+    $('#artist_delete_submit').click((e) => {
+      e.preventDefault();
+      $.ajax({
+        type: "DELETE",
+        url: "/artists/" + $('.artist_edit_form').data('id')
+      });
+    });
+
+  //edit painting info
+    $('#painting_form_submit').click((e) => {
+      e.preventDefault();
+
+      var edit_painting_data = $('.painting_form').serialize();
+      $.ajax({
+        type: "PUT",
+        url: "/paintings/" + $('painting_form').data('id') ,
+        data: edit_painting_data
+      });
+    });
+
+  //delete painting info
+    $('#painting_delete_submit').click((e) => {
+      e.preventDefault();
+      $.ajax({
+        type: "DELETE",
+        url: "/paintings/" + $('painting_form').data('id')
+      });
+    });
+
+});
