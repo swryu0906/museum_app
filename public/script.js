@@ -111,7 +111,9 @@ $(function(){
     // saveArtistData.birthYear = $('#birthYear').val();
     // saveArtistData.description = $('#description').val();
     // console.log(data)
+
     var new_artist_data = $('.artist_form').serialize();
+    console.log(new_artist_data);
     $.ajax({
       type: "POST",
       url: "/artists",

@@ -58,7 +58,7 @@
 
   <!-- Form to add a new Artist -->
   <template id="artist-form-template" type="text/x-handlebars-template">
-    <form class="artist_form" method="post"><br>
+    <form class="artist_form" method="post" action="/artists"><br>
       <label>Name</label><br>
       <input id="name" type="text" name="name"><br>
 
@@ -84,7 +84,7 @@
   <!-- Form to edit existing Artist -->
   <!-- Input fields will be populated with existing Artist information -->
   <template id="artist-edit-template" type="text/x-handlebars-template">
-    <form class="artist_edit_form" method="post"><br>
+    <form class="artist_edit_form" method="post" action="/artists"> <br>
       <label>Name</label><br>
       <input id="name" type="text" name="name" value={{this.name}}><br>
 
@@ -119,7 +119,7 @@
 
   <!-- Form to edit paintings -->
   <template id="painting-form-template" type="text/x-handlebars-template">
-    <form class="painting_form" method="post"><br>
+    <form class="painting_form" method="post" action="/paintings"><br>
       <label>Title</label><br>
       <input id="title" type="text" name="title" value={{this.title}}><br>
 
