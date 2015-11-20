@@ -48,7 +48,7 @@
   <!-- Title, Image, and year will be displayed -->
   <template id="painting-template" type="text/x-handlebars-template">
     {{#each paintings}}
-      <div class="image-frame">
+      <div class="image-frame" data-id={{this._id}}>
         <h1>{{this.title}}</h1>
         <img src={{this.img_url}}></img>
         <p>{{this.year_made}}</p>

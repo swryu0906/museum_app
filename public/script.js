@@ -23,6 +23,23 @@ $(function(){
     });
   });
 
+  $('.results-div').on('click','.image-frame',(e) => {
+    e.preventDefault();
+  let id = $(e.target).closest('.image-frame').data('id');
+  console.log(id);
+  $.ajax({
+    type: "GET",
+    url: "/paintings/" + id
+  }).done((onePainting) => {
+
+    let paintingArray = [];
+    paintingArray.push(onePainting);
+
+    showOnePainting(paintingArray);
+  });
+});
+
+
   $('#showPainting').click((e) => {
     e.preventDefault();
 
@@ -70,6 +87,14 @@ $(function(){
     $results.html('').append(compiledTemplate)
   }
 
+  let showOnePainting = (data) => {
+    resetView();
+
+    let $results = $('.results-div');
+    let compiledTemplate = renderTemplate_show_paintings({paintings: data});
+    $results.html('').append(compiledTemplate);
+  }
+
   let showPainting = (data) => {
     resetView();
 
@@ -102,7 +127,8 @@ $(function(){
 
 
 //pulls new artist info from front end and sends to server.
-  $('#artist_form_submit').click( (e) =>  {
+  $('#artist_form_submit').on('submit', (e) =>  {
+    e.stopImmediatePropagation();
     e.preventDefault();
     // saveArtistData = {};
     // saveArtistData.name = $('#name').val();
